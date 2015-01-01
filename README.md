@@ -1,6 +1,6 @@
 # &lt;gltf-viewer&gt;
 
-A web component to load and render 3D assets in the glTF file format.
+A web component to load and render 3D assets in the [glTF](https://github.com/KhronosGroup/glTF/tree/v0.6) file format (v0.6).
 
 
 Attributes
@@ -45,7 +45,7 @@ Fired when asset has been fully loaded
 Usage
 ------
 ```
-<gltf-viewer src="model.dae"></gltf-viewer>
+<gltf-viewer src="duck.json"></gltf-viewer>
 ```
 
 

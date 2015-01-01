@@ -13,7 +13,7 @@ describe '<gltf-viewer>', ->
 
    ###
    it 'should update model when src attribute changes', ->
-      element.setAttribute "src", ""
+      element.setAttribute "src", "duck.json"
 
    # element gets loaded before listener is added
    it 'should throw progress-state-change while loading asset', (done) ->

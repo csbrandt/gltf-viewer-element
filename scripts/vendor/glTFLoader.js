@@ -843,8 +843,8 @@ THREE.glTFLoader.prototype.load = function(url, callback)
                   texture.magFilter = THREE.LinearFilter;
                }
 
-               //                	if (textureParams.minFilter == "LINEAR")
-               //               		texture.minFilter = THREE.LinearFilter;
+               //                   if (textureParams.minFilter == "LINEAR")
+               //                   texture.minFilter = THREE.LinearFilter;
 
                params.map = texture;
             }
@@ -896,8 +896,8 @@ THREE.glTFLoader.prototype.load = function(url, callback)
                   texture.magFilter = THREE.LinearFilter;
                }
 
-               //                	if (envMapParams.minFilter == WebGLRenderingContext.LINEAR)
-               //               		texture.minFilter = THREE.LinearFilter;
+               //                   if (envMapParams.minFilter == WebGLRenderingContext.LINEAR)
+               //                   texture.minFilter = THREE.LinearFilter;
 
                params.envMap = texture;
             }
@@ -1537,7 +1537,7 @@ THREE.glTFLoader.prototype.load = function(url, callback)
                var i, len = nodeAnimationChannels.length;
                //console.log(" animation channels for node " + name);
                //for (i = 0; i < len; i++) {
-               //	console.log(nodeAnimationChannels[i]);
+               // console.log(nodeAnimationChannels[i]);
                //}
                var anim = new THREE.glTFAnimation(nodeAnimationChannels);
                anim.name = "animation_" + name;
@@ -1638,7 +1638,7 @@ THREE.glTFLoader.prototype.load = function(url, callback)
                var accessor = this.resources.getEntry(parameter);
                /*
                if (!accessor) {
-               	debugger;
+                  debugger;
                }*/
                accessor = accessor.object;
                var bufferView = this.resources.getEntry(accessor.bufferView);
