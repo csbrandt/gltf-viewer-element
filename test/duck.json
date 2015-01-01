@@ -235,17 +235,6 @@
         }
     },
     "profile": "WebGL 1.0.2",
-    "programs": {
-        "program_0": {
-            "attributes": [
-                "a_normal",
-                "a_position",
-                "a_texcoord0"
-            ],
-            "fragmentShader": "duck0FS",
-            "vertexShader": "duck0VS"
-        }
-    },
     "samplers": {
         "sampler_0": {
             "magFilter": 9729,
@@ -262,14 +251,6 @@
                 "camera1",
                 "directionalLight1"
             ]
-        }
-    },
-    "shaders": {
-        "duck0FS": {
-            "path": "duck0FS.glsl"
-        },
-        "duck0VS": {
-            "path": "duck0VS.glsl"
         }
     },
     "skins": {},
