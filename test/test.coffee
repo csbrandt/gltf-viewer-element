@@ -17,8 +17,6 @@ describe '<gltf-viewer>', ->
    it 'should throw progress-state-ready after asset is loaded', (done) ->
       element.addEventListener 'progress-state-ready', ->
          done()
-
-
    ###
    it 'should throw progress-state-change while loading asset', (done) ->
       progressDone = ->
@@ -30,7 +28,6 @@ describe '<gltf-viewer>', ->
 
       expect(progressCB).to.have.been.called
    ###
-
    it 'should resize when width attribute changes', ->
       element.setAttribute "width", "600px"
 

@@ -22,6 +22,7 @@
 
 // Gets a handle to this import doc.
 var doc = document.currentScript.ownerDocument;
+
 // Create element prototype
 var glTFViewPrototype = Object.create(HTMLElement.prototype);
 
@@ -145,10 +146,12 @@ glTFViewPrototype.attributeChangedCallback = function(attrName, oldVal, newVal)
          break;
 
       case 'width':
+         this.resize(attrName, newVal);
 
          break;
 
       case 'height':
+         this.resize(attrName, newVal);
 
          break;
 
@@ -204,24 +207,22 @@ glTFViewPrototype.updateLoadProgress = function(progressInfoObj)
    this.dispatchEvent(event);
 };
 
-glTFViewPrototype.updateLoadReady = function(collada)
+glTFViewPrototype.updateLoadReady = function(data)
 {
-   var event = new CustomEvent('progress-state-ready', collada);
+   var event = new CustomEvent('progress-state-ready', data);
    this.dispatchEvent(event);
 };
 
-glTFViewPrototype.onResize = function()
+glTFViewPrototype.resize = function(attrName, value)
 {
-   // set a timer so we check for
-   // new dimensions AFTER the resize is completed
-   setTimeout(function()
-   {
-      //this.camera.aspect = this.width / this.height;
-      //this.camera.updateProjectionMatrix();
+   var viewer = this.shadowRoot.querySelector("#viewer");
 
-      //this.renderer.setSize(this.width, this.height);
+   viewer.style[attrName] = value;
 
-   }.bind(this), 500);
+   this.camera.aspect = viewer.clientWidth / viewer.clientHeight;
+   this.camera.updateProjectionMatrix();
+   this.renderer.setSize(viewer.clientWidth, viewer.clientHeight);
+   this.controls.trackball.handleResize();
 };
 
 document.registerElement("gltf-viewer",
