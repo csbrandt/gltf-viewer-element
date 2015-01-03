@@ -10,7 +10,6 @@ var glTFViewPrototype = Object.create(HTMLElement.prototype);
 var defaults = {
    controls: 'TrackballControls',
    scale: '0.002',
-   material: '',
    width: '320px',
    height: '240px'
 };

@@ -3,8 +3,6 @@
 
   element = document.querySelector('gltf-viewer');
 
-  debugger;
-
   describe('<gltf-viewer>', function() {
     describe('WebGL', function() {
       return it('should be enabled', function() {

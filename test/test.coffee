@@ -1,6 +1,6 @@
 element = document.querySelector 'gltf-viewer'
 
-debugger
+#debugger
 
 describe '<gltf-viewer>', ->
    describe 'WebGL', ->

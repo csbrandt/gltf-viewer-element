@@ -25,10 +25,6 @@ Name of the scene interaction method
 | :------ | ------: |
 Factor applied to size the imported scene
 
-|**material** | default: '' |
-| :------ | ------: |
-Name of material applied to the imported scene
-
 
 Events
 -------
