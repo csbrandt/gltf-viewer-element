@@ -1,6 +1,6 @@
 element = document.querySelector 'gltf-viewer'
 
-#debugger
+debugger
 
 describe '<gltf-viewer>', ->
    describe 'WebGL', ->
@@ -11,17 +11,25 @@ describe '<gltf-viewer>', ->
       it 'should exist', ->
       expect(element).to.be.a('object')
 
+   it 'should update model when src attribute changes', ->
+      element.setAttribute "src", "duck.json"
+
    it 'should throw progress-state-ready after asset is loaded', (done) ->
       element.addEventListener 'progress-state-ready', ->
          done()
 
-   it 'should update model when src attribute changes', ->
-      element.setAttribute "src", "duck.json"
 
-   # element gets loaded before listener is added
+   ###
    it 'should throw progress-state-change while loading asset', (done) ->
-      element.addEventListener 'progress-state-change', ->
+      progressDone = ->
          done()
+
+      progressCB = sinon.spy(progressDone)
+
+      element.addEventListener 'progress-state-change', progressCB
+
+      expect(progressCB).to.have.been.called
+   ###
 
    it 'should resize when width attribute changes', ->
       element.setAttribute "width", "600px"
