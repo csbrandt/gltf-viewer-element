@@ -36,27 +36,19 @@ glTFViewPrototype.createdCallback = function()
    {
       if (this.attributes[attribute].nodeName)
       {
-         elementAttributes[this.attributes[attribute].nodeName] = this.attributes[attribute].nodeValue;
+         elementAttributes[this.attributes[attribute].nodeName] = this.attributes[attribute].value;
       }
    }
 
    this.settings = extend(defaults, elementAttributes);
-
+   // start loading the given file
    this.loadFile();
-   // todo issue with setting renderer dim before element is loaded
-   this.initialize();
-   this.animate();
+   // elements must be in the (shadow) DOM to get runtime viewer size
+   window.onload = this.initialize.bind(this);
 };
 
 glTFViewPrototype.initialize = function()
 {
-   // bind on files opened by the filesystem
-   //this.model.get("fs").bind("change:openedFile", this.loadFile, this);
-   // bind on material selection
-   //this.model.get("material").bind("change:selectedMaterial", this.updateMaterial, this);
-   // bind on window resize
-   window.onresize = this.onResize.bind(this);
-
    if (Detector.webgl)
    {
       this.renderer = new THREE.WebGLRenderer(
@@ -77,6 +69,7 @@ glTFViewPrototype.initialize = function()
 
    this.scene = new THREE.Scene();
    this.camera = new THREE.PerspectiveCamera(60, viewer.clientWidth / viewer.clientHeight, 0.1, 1000);
+
    this.camera.position.set(4, 4, 3);
    this.controls = {};
    var ambient = new THREE.AmbientLight(0x050505);
@@ -118,6 +111,8 @@ glTFViewPrototype.initialize = function()
    this.controls.trackball.staticMoving = true;
 
    viewer.appendChild(this.renderer.domElement);
+
+   this.animate();
 };
 
 glTFViewPrototype.attributeChangedCallback = function(attrName, oldVal, newVal)
@@ -142,7 +137,6 @@ glTFViewPrototype.attributeChangedCallback = function(attrName, oldVal, newVal)
 
          break;
    }
-
 };
 
 glTFViewPrototype.animate = function()
@@ -167,8 +161,6 @@ glTFViewPrototype.loadFile = function()
       // scale model
       model.scale.x = model.scale.y = model.scale.z = 0.002;
       model.updateMatrix();
-      //this.initialize();
-      //this.animate();
 
       // if a model is already loaded
       if (this.currentModel)
@@ -190,14 +182,12 @@ glTFViewPrototype.loadFile = function()
 glTFViewPrototype.updateLoadProgress = function(progressInfoObj)
 {
    var event = new CustomEvent('progress-state-change', progressInfoObj);
-   // Dispatch the event.
    this.dispatchEvent(event);
 };
 
 glTFViewPrototype.updateLoadReady = function(collada)
 {
    var event = new CustomEvent('progress-state-ready', collada);
-   // Dispatch the event.
    this.dispatchEvent(event);
 };
 
