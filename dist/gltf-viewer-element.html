@@ -21,7 +21,7 @@
 /* global Detector */
 
 // Gets a handle to this import doc.
-var doc = document.currentScript.ownerDocument;
+var doc = document._currentScript.ownerDocument;
 
 // Create element prototype
 var glTFViewPrototype = Object.create(HTMLElement.prototype);
