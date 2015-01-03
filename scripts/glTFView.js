@@ -43,6 +43,9 @@ glTFViewPrototype.createdCallback = function()
    this.settings = extend(defaults, elementAttributes);
 
    this.loadFile();
+   // todo issue with setting renderer dim before element is loaded
+   this.initialize();
+   this.animate();
 };
 
 glTFViewPrototype.initialize = function()
@@ -158,14 +161,14 @@ glTFViewPrototype.loadFile = function()
 {
    var glTFLoader = new THREE.glTFLoader();
 
-   glTFLoader.load(this.settings.src, function(collada)
+   glTFLoader.load(this.settings.src, function(data)
    {
-      var dae = collada.scene;
+      var model = data.scene;
       // scale model
-      dae.scale.x = dae.scale.y = dae.scale.z = 0.002;
-      dae.updateMatrix();
-      this.initialize();
-      this.animate();
+      model.scale.x = model.scale.y = model.scale.z = 0.002;
+      model.updateMatrix();
+      //this.initialize();
+      //this.animate();
 
       // if a model is already loaded
       if (this.currentModel)
@@ -175,11 +178,11 @@ glTFViewPrototype.loadFile = function()
       }
 
       // set current model
-      this.currentModel = dae;
+      this.currentModel = model;
       // add model to scene
-      this.scene.add(dae);
+      this.scene.add(model);
 
-      this.updateLoadReady(collada);
+      this.updateLoadReady(data);
 
    }.bind(this), this.updateLoadProgress.bind(this));
 };

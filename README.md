@@ -61,22 +61,6 @@ Then run the tests:
     $ npm test
 
 
-Code Coverage
---------------
-Install the development dependencies:
-
-    $ npm install
-    $ bower install
-
-Then run coverage
-
-    $ npm run coverage
-
-View coverage reports
-
-    $ firefox coverage/lcov-report/index.html
-
-
 ## License
 
 Copyright (c) 2014 Christopher Brandt
