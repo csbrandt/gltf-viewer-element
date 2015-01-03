@@ -1,7 +1,6 @@
-
 module.exports = {
     verbose: true,
-    plugins: {
+    plugins: {/*
         "web-component-tester-istanbul": {
 
             dir: "./coverage",
@@ -12,6 +11,6 @@ module.exports = {
                 "scripts/*.js"
             ]
 
-        }
+        }*/
     }
 };

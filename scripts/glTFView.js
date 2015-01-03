@@ -15,6 +15,8 @@ var defaults = {
    height: '240px'
 };
 
+var settings;
+
 function extend(target, source)
 {
    for (var key in source)
@@ -41,9 +43,9 @@ glTFViewPrototype.createdCallback = function()
       }
    }
 
-   this.settings = extend(defaults, elementAttributes);
+   settings = extend(defaults, elementAttributes);
    // start loading the given file
-   this.loadFile();
+   this.loadFile(settings.src);
    // elements must be in the (shadow) DOM to get runtime viewer size
    window.onload = this.initialize.bind(this);
 };
@@ -65,8 +67,8 @@ glTFViewPrototype.initialize = function()
 
    var viewer = this.shadowRoot.querySelector("#viewer");
 
-   viewer.style.width = this.settings.width;
-   viewer.style.height = this.settings.height;
+   viewer.style.width = settings.width;
+   viewer.style.height = settings.height;
 
    this.scene = new THREE.Scene();
    this.camera = new THREE.PerspectiveCamera(60, viewer.clientWidth / viewer.clientHeight, 0.1, 1000);
@@ -121,8 +123,7 @@ glTFViewPrototype.attributeChangedCallback = function(attrName, oldVal, newVal)
    switch (attrName)
    {
       case 'src':
-         this.settings.src = newVal;
-         this.loadFile();
+         this.loadFile(newVal);
 
          break;
 
@@ -154,11 +155,11 @@ glTFViewPrototype.render = function()
    this.renderer.render(this.scene, this.camera);
 };
 
-glTFViewPrototype.loadFile = function()
+glTFViewPrototype.loadFile = function(src)
 {
    var glTFLoader = new THREE.glTFLoader();
 
-   glTFLoader.load(this.settings.src, function(data)
+   glTFLoader.load(src, function(data)
    {
       var model = data.scene;
       // scale model
