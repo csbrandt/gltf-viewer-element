@@ -72,6 +72,40 @@ module.exports = function(grunt) {
                 }
             }
         },
+        uglify: {
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: './',
+                    src: '<%= yeoman.build %>/**/*.js',
+                    dest: ''
+                }]
+            }
+        },
+        htmlmin: {
+            all: {
+                options: {
+                   removeComments: true,
+                   collapseWhitespace: true
+                },
+                files: [{
+                   expand: true,
+                   cwd: './',
+                   src: '<%= yeoman.build %>/**/*.html',
+                   dest: ''
+                }]
+            }
+        },
+        cssmin: {
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: './',
+                    src: '<%= yeoman.build %>/**/*.css',
+                    dest: ''
+                }]
+            }
+        },
         smoosher: {
             all: {
                 options: {
@@ -81,7 +115,16 @@ module.exports = function(grunt) {
                 files: {
                     '<%= yeoman.dist %>/gltf-viewer-element.html': '<%= yeoman.build %>/index.html',
                 },
-            }
+            },
+            min: {
+                options: {
+                    jsDir: "<%= yeoman.build %>",
+                    cssDir: "<%= yeoman.build %>"
+                },
+                files: {
+                    '<%= yeoman.dist %>/gltf-viewer-element.min.html': '<%= yeoman.build %>/index.html',
+                },
+            },
         },
         // Watches files for changes and runs tasks based on the changed files
         watch: {
@@ -180,7 +223,8 @@ module.exports = function(grunt) {
                     ]
                 }]
             },
-            server: '.tmp'
+            server: '.tmp',
+            build: ['<%= yeoman.build %>']
         },
         // Add vendor prefixed styles
         autoprefixer: {
@@ -268,6 +312,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', [
         'jshint:all',
         'clean:dist',
+        'clean:build',
         'jsbeautifier',
         'coffee:compile',
         'less:dist',
@@ -276,6 +321,21 @@ module.exports = function(grunt) {
         'concat:script',
         'concat:markup',
         'smoosher:all'
+    ]);
+    grunt.registerTask('build:min', [
+        'jshint:all',
+        'clean:build',
+        'jsbeautifier',
+        'coffee:compile',
+        'less:dist',
+        //'concurrent:dist',
+        'autoprefixer',
+        'concat:script',
+        'concat:markup',
+        'uglify:all',
+        'htmlmin:all',
+        'cssmin:all',
+        'smoosher:min'
     ]);
     grunt.registerTask('default', [
         'newer:jshint',
