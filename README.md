@@ -1,3 +1,5 @@
+[![NPM](https://nodei.co/npm/gltf-viewer-element.png?downloads=true&stars=true)](https://nodei.co/npm/gltf-viewer-element/)
+
 # &lt;gltf-viewer&gt;
 
 A web component to load and render 3D assets in the [glTF](https://github.com/KhronosGroup/glTF/tree/v0.6) file format (v0.6).
