@@ -1,6 +1,6 @@
 {
   "name": "gltf-viewer-element",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A web component to load and render 3D assets in the glTF file format.",
   "repository": {
     "url": "https://github.com/csbrandt/gltf-viewer-element.git"
