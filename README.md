@@ -4,7 +4,7 @@
 
 A web component to load and render 3D assets in the [glTF](https://github.com/KhronosGroup/glTF/tree/v0.6) file format (v0.6). 
 
-Demo: https://csbrandt.github.io/gltf-viewer-element/test/runner.html
+Demo: https://csbrandt.github.io/gltf-viewer-element/
 
 
 Attributes

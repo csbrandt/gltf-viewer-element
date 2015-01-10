@@ -170,22 +170,6 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            test: {
-                options: {
-                    port: 9001,
-                    middleware: function(connect) {
-                        return [
-                            connect.static('.tmp'),
-                            connect.static('test'),
-                            connect().use(
-                                '/bower_components',
-                                connect.static('./bower_components')
-                            ),
-                            connect.static(appConfig.app)
-                        ];
-                    }
-                }
-            },
             dist: {
                 options: {
                     open: true,
@@ -276,13 +260,6 @@ module.exports = function(grunt) {
                 'imagemin',
                 'svgmin'
             ]
-        },
-        // Test settings
-        karma: {
-            unit: {
-                configFile: 'test/karma.conf.coffee',
-                singleRun: true
-            }
         }
     });
     grunt.registerTask('serve', 'Compile then start a connect web server', function(target) {
@@ -301,14 +278,6 @@ module.exports = function(grunt) {
         grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
         grunt.task.run(['serve:' + target]);
     });
-    grunt.registerTask('test', [
-        'clean:server',
-        'coffee:compile',
-        'concurrent:test',
-        'autoprefixer',
-        'connect:test',
-        'karma'
-    ]);
     grunt.registerTask('build', [
         'jshint:all',
         'clean:dist',
@@ -339,7 +308,7 @@ module.exports = function(grunt) {
     ]);
     grunt.registerTask('default', [
         'newer:jshint',
-        'test',
-        'build'
+        'build',
+        'build:min'
     ]);
 };
