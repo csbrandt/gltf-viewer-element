@@ -6,7 +6,7 @@
     "url": "https://github.com/csbrandt/gltf-viewer-element.git"
   },
   "scripts": {
-    "test": "wct test/runner.html"
+    "test": "wct test/index.html"
   },
   "author": "csbrandt",
   "license": "MIT",
